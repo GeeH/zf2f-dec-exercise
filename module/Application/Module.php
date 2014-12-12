@@ -26,7 +26,9 @@ class Module
     public function onDispatch(MvcEvent $mvcEvent)
     {
         $viewModel = $mvcEvent->getViewModel();
-        $viewModel->setVariable('categories', 'CATEGORY_LIST');
+        $serviceManager = $mvcEvent->getApplication()->getServiceManager();
+        $categories = $serviceManager->get('categories');
+        $viewModel->setVariable('categories', $categories);
     }
 
     public function getConfig()
@@ -40,6 +42,32 @@ class Module
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'services' => array(
+                'categories' => array(
+                    'barter',
+                    'beauty',
+                    'clothing',
+                    'computer',
+                    'entertainment',
+                    'free',
+                    'garden',
+                    'general',
+                    'health',
+                    'household',
+                    'phones',
+                    'property',
+                    'sporting',
+                    'tools',
+                    'transportation',
+                    'wanted',
                 ),
             ),
         );

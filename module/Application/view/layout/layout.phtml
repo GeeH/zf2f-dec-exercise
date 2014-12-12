@@ -45,7 +45,13 @@
         </nav>
         <div class="container">
             <div class="col-lg-2">
-                <?php echo $this->categories; ?>
+                <ul>
+                <?php
+                    foreach($this->categories as $category) {
+                        echo '<li>' . $category . '</li>';
+                    }
+                ?>
+                </ul>
             </div>
             <div class="col-lg-10">
                 <?php echo $this->content; ?>
